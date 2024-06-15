@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Transaction extends Model
 {
     use HasFactory;
     use HasUuids;
@@ -18,11 +18,11 @@ class Category extends Model
      */
     protected $keyType = 'string';
 
-    protected $fillable = [
-        "name"
-    ];
+    public function transactionDetails() {
+        return $this->hasMany(TransactionDetail::class, 'transaction_id', 'id');
+    }
 
-    public function product() {
-        return $this->hasMany(Product::class);
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }
