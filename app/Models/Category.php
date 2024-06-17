@@ -12,6 +12,20 @@ class Category extends Model
     use HasUuids;
 
     /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * The data type of the primary key ID.
      *
      * @var string
@@ -23,6 +37,6 @@ class Category extends Model
     ];
 
     public function product() {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'product_id', 'id');
     }
 }

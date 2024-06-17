@@ -14,6 +14,20 @@ class Product extends Model
     use SoftDeletes;
 
     /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * The data type of the primary key ID.
      *
      * @var string
@@ -26,11 +40,12 @@ class Product extends Model
         'specification',
         'description',
         'category',
-        'image'
+        'image',
+        'rating'
     ];
 
-    public function users() {
-        return $this->belongsTo(User::class);
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function category() {

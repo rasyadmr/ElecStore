@@ -17,9 +17,9 @@ return new class extends Migration
             $table->integer('price');
             $table->longText('specification');
             $table->longText('description');
-            $table->string('image');
-            $table->integer('rating');
-            $table->integer('purchase');
+            $table->string('image')->nullable();
+            $table->integer('rating')->default(0);
+            $table->integer('purchase')->default(0);
             $table->string('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('category_id');
