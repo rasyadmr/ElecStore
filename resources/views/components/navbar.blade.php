@@ -15,16 +15,10 @@
                     </div>
                 </div>
             </div>
+
+            @auth
             <div class="hidden md:block">
                 <div class="ml-4 flex items-center md:ml-6">
-                    {{-- <button type="button" class="relative rounded-full bg-white p-1 text-dark5 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <span class="absolute -inset-1.5"></span>
-                        <span class="sr-only">View cart</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                            <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
-                        </svg>
-                    </button> --}}
-
                     <button type="button" class="relative rounded-full bg-dark3 p-1 hover:text-gray-500 dark:text-white dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span class="absolute -inset-1.5"></span>
                         <span class="sr-only">View cart</span>
@@ -55,14 +49,29 @@
                             <!-- Active: "bg-gray-100", Not Active: "" -->
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                            <a href="" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
                         </div>
                     </div>
                 </div>
             </div>
+            @endauth
+
+            @guest
+            <div class="hidden md:block">
+                <div class="ml-4 flex items-center md:ml-6">
+                    <a href="{{ route('register') }}">
+                        <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mx-3">Sign Up</button>
+                    </a>
+                    <a href="{{ route('login') }}">
+                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign In</button>
+                    </a>
+                </div>
+            </div>
+            @endguest
+
             <div class="-mr-2 flex md:hidden">
                 <!-- Mobile menu button -->
-                <button type="button" @click="isOpen = !isOpen" class="relative inline-flex items-center justify-center rounded-md bg-dark2 p-2 text-white hover:bg-dark3 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-dark3" aria-controls="mobile-menu" aria-expanded="false">
+                <button type="button" @click="isOpen = !isOpen" class="relative inline-flex items-center justify-center rounded-md bg-dark2 p-2 dark:text-white hover:bg-dark3 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-dark3" aria-controls="mobile-menu" aria-expanded="false">
                     <span class="absolute -inset-0.5"></span>
                     <span class="sr-only">Open main menu</span>
                     <!-- Menu open: "hidden", Menu closed: "block" -->
@@ -81,16 +90,13 @@
     <!-- Mobile menu, show/hide based on menu state. -->
     <div x-show="isOpen" class="md:hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            {{-- <a href="/" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Home</a>
-            <a href="/product" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Product</a>
-            <a href="/category" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Category</a>
-            <a href="/about" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a> --}}
             <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
             <x-nav-link href="/product" :active="request()->is('product')">Product</x-nav-link>
             <x-nav-link href="/category" :active="request()->is('category')">Category</x-nav-link>
             <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
         </div>
+
+        @auth
         <div class="border-t border-gray-700 pb-3 pt-4">
             <div class="flex items-center px-5">
                 <div class="flex-shrink-0">
@@ -114,5 +120,20 @@
                 <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
             </div>
         </div>
+        @endauth
+
+        @guest
+        <div class="border-t border-gray-700 pb-3 pt-4">
+            <div class="mt-3 space-y-1 px-2">
+                <a href="{{ route('login') }}" class="block rounded-md px-3 m-auto py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">
+                    Login
+                </a>
+                <a href="{{ route('register') }}" class="block rounded-md px-3 m-auto py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">
+                    Register
+                </a>
+            </div>
+        </div>
+        @endguest
+
     </div>
 </nav>
