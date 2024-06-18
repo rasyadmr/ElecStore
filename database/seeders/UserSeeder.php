@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class UserSeeder extends Seeder
                 'email' => 'johndoe@example.com',
                 'phonenumber' => '1234567890',
                 'address' => '123 Main St, Anytown, USA',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'isSeller' => true,
                 'isAdmin' => false,
             ],
@@ -30,7 +31,7 @@ class UserSeeder extends Seeder
                 'email' => 'janesmith@example.com',
                 'phonenumber' => '0987654321',
                 'address' => '456 Elm St, Othertown, USA',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'isSeller' => false,
                 'isAdmin' => false,
             ],
@@ -40,7 +41,7 @@ class UserSeeder extends Seeder
                 'email' => 'alicej@example.com',
                 'phonenumber' => '1122334455',
                 'address' => '789 Maple St, Sometown, USA',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'isSeller' => true,
                 'isAdmin' => false,
             ],
@@ -50,7 +51,7 @@ class UserSeeder extends Seeder
                 'email' => 'bobb@example.com',
                 'phonenumber' => '2233445566',
                 'address' => '101 Pine St, Villagetown, USA',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'isSeller' => false,
                 'isAdmin' => false,
             ],
@@ -60,7 +61,7 @@ class UserSeeder extends Seeder
                 'email' => 'charlied@example.com',
                 'phonenumber' => '3344556677',
                 'address' => '202 Oak St, Smalltown, USA',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'isSeller' => true,
                 'isAdmin' => true,
             ],
@@ -70,7 +71,7 @@ class UserSeeder extends Seeder
                 'email' => 'dianae@example.com',
                 'phonenumber' => '4455667788',
                 'address' => '303 Birch St, Largetown, USA',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'isSeller' => false,
                 'isAdmin' => false,
             ],
@@ -80,7 +81,7 @@ class UserSeeder extends Seeder
                 'email' => 'edwardf@example.com',
                 'phonenumber' => '5566778899',
                 'address' => '404 Cedar St, Midtown, USA',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'isSeller' => true,
                 'isAdmin' => false,
             ],
@@ -90,7 +91,7 @@ class UserSeeder extends Seeder
                 'email' => 'fionag@example.com',
                 'phonenumber' => '6677889900',
                 'address' => '505 Spruce St, Uppertown, USA',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'isSeller' => false,
                 'isAdmin' => true,
             ],
@@ -100,7 +101,7 @@ class UserSeeder extends Seeder
                 'email' => 'georgeh@example.com',
                 'phonenumber' => '7788990011',
                 'address' => '606 Willow St, Newtown, USA',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'isSeller' => true,
                 'isAdmin' => false,
             ],
@@ -110,7 +111,7 @@ class UserSeeder extends Seeder
                 'email' => 'hannahi@example.com',
                 'phonenumber' => '8899001122',
                 'address' => '707 Redwood St, Anothertown, USA',
-                'password' => bcrypt('password'),
+                'password' => Hash::make('password'),
                 'isSeller' => false,
                 'isAdmin' => false,
             ]];
