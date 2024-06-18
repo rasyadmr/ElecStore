@@ -33,7 +33,8 @@ class Category extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        "name"
+        'name',
+        'image'
     ];
 
     public function product() {

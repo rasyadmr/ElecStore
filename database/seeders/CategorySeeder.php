@@ -14,16 +14,38 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Laptops'],
-            ['name' => 'Smartphones'],
-            ['name' => 'Tablets'],
-            ['name' => 'Televisions'],
-            ['name' => 'Cameras'],
-            ['name' => 'Audio Devices'],
-            ['name' => 'Accessories'],
-            ['name' => 'Gaming Consoles'],
-            ['name' => 'Smart Home Devices'],
-            ['name' => 'Computer Accessories'],
+            [
+                'name' => 'Laptops',
+                'image' => 'laptop.png'
+            ],
+            [
+                'name' => 'Smartphones',
+                'image' => 'smartphone.png'
+            ],
+            [
+                'name' => 'Tablets',
+                'image' => 'tablet.png'
+            ],
+            [
+                'name' => 'Televisions',
+                'image' => 'tv.webp'
+            ],
+            [
+                'name' => 'Cameras',
+                'image' => 'camera.webp'
+            ],
+            [
+                'name' => 'Audio Devices',
+                'image' => 'audio.png'
+            ],
+            [
+                'name' => 'Accessories',
+                'image' => 'accessories.webp'
+            ],
+            [
+                'name' => 'Gaming Consoles',
+                'image' => 'gaming.webp'
+            ]
         ];
 
         foreach ($categories as $category) {
