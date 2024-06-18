@@ -1,22 +1,22 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Product;
 
 use Closure;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Product;
 
-class Search extends Component
+class Card extends Component
 {
-    public Collection $categories;
+    public Product $product;
 
     /**
      * Create a new component instance.
      */
-    public function __construct(Collection $categories)
+    public function __construct(Product $product)
     {
-        $this->categories = $categories;
+        $this->product = $product;
     }
 
     /**
@@ -24,6 +24,6 @@ class Search extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.search');
+        return view('components.product.card');
     }
 }
