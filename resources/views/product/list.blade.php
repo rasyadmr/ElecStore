@@ -14,4 +14,6 @@
         @endforeach
     @endif
 </section>
+
+{{ $products->links() }}
 @endsection

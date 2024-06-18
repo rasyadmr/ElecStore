@@ -23,7 +23,10 @@
             </div>
             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">{{ $product->rating }}</span>
         </div>
-        <a href="" class="text-md font-normal text-gray-900 dark:text-white">{{ $product->user->name }}</a>
+        <div class="flex flex-col">
+            <a href="?category={{ $product->category->name }}" class="text-blue-700 font-normal">{{ $product->category->name }}</a>
+            <a href="" class="text-md font-semibold text-gray-900 dark:text-white">{{ $product->user->name }}</a>    
+        </div>
         <div class="flex items-center justify-between">
             <span class="text-lg font-bold text-gray-900 dark:text-white">Rp {{ $product->price }}</span>
             <a href="/product/{{ $product->id }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">See detail</a>

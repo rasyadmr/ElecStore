@@ -10,8 +10,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index() {
-        // dd(Product::filter(request(['search']))->get());
-        $products = Product::filter(request(['search', 'category']))->with(['user', 'category'])->get();
+        $products = Product::filter(request(['search', 'category']))->with(['user', 'category'])->paginate(8);
 
         return view('product.list', [
             "title" => "Product",
