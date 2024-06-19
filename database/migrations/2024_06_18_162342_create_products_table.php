@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('price');
             $table->longText('specification');
             $table->longText('description');
-            $table->string('image')->nullable();
+            $table->string('photo')->nullable();
             $table->integer('rating')->default(0);
             $table->integer('purchase')->default(0);
             $table->string('user_id');

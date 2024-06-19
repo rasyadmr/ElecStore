@@ -21,7 +21,7 @@
         }
     </script>
 </head>
-<body>
+<body class="bg-white dark:bg-dark1">
     @yield('body')
 
     <button id="theme-toggle" type="button" class="fixed bottom-5 right-5 px-2 py-2 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">

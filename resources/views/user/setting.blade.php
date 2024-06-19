@@ -3,14 +3,14 @@
 @section('body')
 <section class="bg-gray-200 dark:bg-dark1">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-5">
-        <a href="/" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
             <img class="w-8 h-8 mr-2" src="https://cdn.iconscout.com/icon/free/png-256/free-electric-showk-electrical-electricity-shock-wire-38949.png?f=webp" alt="logo">
             ElecStore
         </a>
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Register your new account
+                    Account setting
                 </h1>
                 <a href="/" class="text-blue-700 flex flex-row dark:text-blue-500">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 my-auto">
@@ -126,14 +126,13 @@
                         @else
                             text-gray-900 dark:text-white
                         @enderror" for="photo">Upload Profile Picture</label>
-                        <img class="preview rounded max-h-60 my-3" src="" style="display: none;">
                         <input class="
                         @error('photo')
                             block w-full text-sm text-red-900 border border-red-300 rounded-lg cursor-pointer bg-red-50 dark:text-red-400 focus:outline-none dark:bg-red-700 dark:border-red-600 dark:placeholder-red-400
                         @else
                             block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                         @enderror
-                        " name="photo" id="photo" type="file" onchange="previewImage()">
+                        " name="photo" id="photo" type="file">
                         @error('photo')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
@@ -198,23 +197,4 @@
         </div>
     </div>
 </section>
-@endsection
-
-@section('root-script')
-    <script>
-        function previewImage() {
-            const image = document.querySelector('input#photo');
-            const preview = document.querySelector('.preview');
-
-            preview.style.display = 'block';
-
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
-
-            oFReader.onload = function(oFREvent) {
-                preview.src = oFREvent.target.result;
-            }
-        }
-
-    </script>
 @endsection

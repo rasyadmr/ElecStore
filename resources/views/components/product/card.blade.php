@@ -1,7 +1,7 @@
 @props(['product'])
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 my-4 mx-auto">
     <a href="/product/{{ $product->id }}">
-        <img class="p-8 rounded-t-lg max-h-40 m-auto" src="{{ asset('assets/images/products/'.$product->image) }}" alt="product image" />
+        <img class="p-8 rounded-t-lg max-h-40 m-auto" src="{{ asset('storage/'.$product->photo) }}" alt="product image" />
     </a>
     <div class="px-5 pb-5">
         <a href="/product/{{ $product->id }}">
@@ -24,8 +24,8 @@
             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">{{ $product->rating }}</span>
         </div>
         <div class="flex flex-col">
-            <a href="?category={{ $product->category->name }}" class="text-blue-700 font-normal">{{ $product->category->name }}</a>
-            <a href="" class="text-md font-semibold text-gray-900 dark:text-white">{{ $product->user->name }}</a>    
+            <a href="/product?category={{ $product->category->name }}" class="text-blue-700 font-normal">{{ $product->category->name }}</a>
+            <a href="/user/{{ $product->user->username }}" class="text-md font-semibold text-gray-900 dark:text-white">{{ $product->user->name }}</a>    
         </div>
         <div class="flex items-center justify-between">
             <span class="text-lg font-bold text-gray-900 dark:text-white">Rp {{ $product->price }}</span>

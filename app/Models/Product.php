@@ -39,8 +39,9 @@ class Product extends Model
         'price',
         'specification',
         'description',
-        'category',
-        'image',
+        'category_id',
+        'user_id',
+        'photo',
         'rating'
     ];
 

@@ -10,7 +10,7 @@
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Register your new account
+                    Setting your account
                 </h1>
                 <a href="/" class="text-blue-700 flex flex-row dark:text-blue-500">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 my-auto">
@@ -35,7 +35,7 @@
                         @else
                             bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
                         @enderror
-                        " placeholder="username" value="{{ old('name') }}" required>
+                        " placeholder="username" value="{{ old('name', auth()->user()->name) }}" required>
                         @error('name')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
@@ -53,7 +53,7 @@
                         @else
                             bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
                         @enderror
-                        " value="{{ old('username') }}" required>
+                        " value="{{ old('username', auth()->user()->username) }}" disabled required>
                         @error('username')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
@@ -71,7 +71,7 @@
                         @else
                             bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
                         @enderror
-                        " value="{{ old('email') }}" required>
+                        " value="{{ old('email', auth()->user()->email) }}" disabled required>
                         @error('email')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
@@ -95,7 +95,7 @@
                             @else
                                 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
                             @enderror
-                            " placeholder="081234567890" value="{{ old('phonenumber') }}" required />
+                            " placeholder="081234567890" value="{{ old('phonenumber', auth()->user()->phonenumber) }}"  required />
                         </div>
                         @error('phonenumber')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
@@ -114,7 +114,7 @@
                         @else
                             block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
                         @enderror
-                        "  placeholder="Address...">{{ old('address') }}</textarea>
+                        "  placeholder="Address...">{{ old('address', auth()->user()->address) }}</textarea>
                         @error('address')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
@@ -133,7 +133,7 @@
                         @else
                             block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                         @enderror
-                        " name="photo" id="photo" type="file" onchange="previewImage()">
+                        " name="photo" id="photo" type="file" onchange="previewImage()" value="{{ old('image', auth()->user()->image) }}" >
                         @error('photo')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
@@ -174,25 +174,7 @@
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="flex items-center mb-4">
-                        <input id="tnc" name="tnc" type="checkbox" class="
-                        @error('tnc')
-                            w-4 h-4 text-red-600 bg-red-100 border-red-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-red-800 focus:ring-2 dark:bg-red-700 dark:border-red-600
-                        @else
-                            w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600
-                        @enderror
-                        ">
-                        <label for="tnc" class="ms-2 text-sm font-medium 
-                        @error('tnc')
-                            text-red-700 dark:text-red-500
-                        @else
-                            text-gray-900 dark:text-gray-300
-                        @enderror">Agree to our Terms & Conditions</label>
-                    </div>
-                    <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign up</button>
-                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Already have an account? <a href="/login" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Sign in</a>
-                    </p>
+                    <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save changes</button>
                 </form>
             </div>
         </div>

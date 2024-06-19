@@ -37,7 +37,7 @@
     @endif
 
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+        <a href="/" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
             <img class="w-8 h-8 mr-2" src="https://cdn.iconscout.com/icon/free/png-256/free-electric-showk-electrical-electricity-shock-wire-38949.png?f=webp" alt="logo">
             ElecStore
         </a>
