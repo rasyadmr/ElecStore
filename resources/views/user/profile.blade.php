@@ -13,8 +13,10 @@
 
     <div class="flex justify-between">
         <h1 class="text-3xl my-5 font-bold text-black dark:text-white">Products</h1>
-        @if (auth()->user()->id === $user->id)
-            <a href="/product/new" class="bg-dark3 hover:bg-blue-700 text-white rounded my-4 p-2">Add Product</a>
+        @if (Auth::check())
+            @if (auth()->user()->id === $user->id)
+                <a href="/product/new" class="bg-dark3 hover:bg-blue-700 text-white rounded my-4 p-2">Add Product</a>
+            @endif
         @endif
     </div>
     <hr>
@@ -22,10 +24,16 @@
         @if ($user->products->isEmpty())
             <p class="font-light text-sm text-gray-600 text-center md:col-span-2 lg:col-span-4 my-4">No items here</p>
         @else
-            @if (auth()->user()->id === $user->id)
-                @foreach ($user->products as $product)
-                    <x-product.card-owner :product="$product"/>
-                @endforeach
+            @if (Auth::check())
+                @if (auth()->user()->id === $user->id)
+                    @foreach ($user->products as $product)
+                        <x-product.card-owner :product="$product"/>
+                    @endforeach
+                @else
+                    @foreach ($user->products as $product)
+                        <x-product.card :product="$product"/>
+                    @endforeach
+                @endif
             @else
                 @foreach ($user->products as $product)
                     <x-product.card :product="$product"/>

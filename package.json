@@ -2,7 +2,7 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "dev" : "vite",
+        "dev": "vite",
         "build": "vite build",
         "development": "mix",
         "watch": "mix watch",

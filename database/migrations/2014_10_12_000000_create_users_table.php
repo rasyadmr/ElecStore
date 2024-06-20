@@ -22,7 +22,7 @@ return new class extends Migration
                 $table->string('password');
                 $table->boolean('isSeller')->default(false);
                 $table->boolean('isAdmin')->default(false);
-                $table->string('photo')->default('assets/images/default_profile.jpg');
+                $table->string('photo')->default('images/default_profile.png');
                 $table->rememberToken();
                 $table->timestamps();
             });
