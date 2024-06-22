@@ -64,6 +64,7 @@
                     <p id="helper-text-explanation" class="my-2 text-sm text-gray-500 dark:text-gray-400">Please select the correct quantity</p>
                 </div>
                 
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <button class="h-10 bg-dark3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded md:ms-auto md:my-auto">Add to Cart</button>
             </div>
         </form>

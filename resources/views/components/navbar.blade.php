@@ -26,8 +26,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                                 <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
                             </svg>
-                            @if (!session('cart') OR empty(session('cart')))
-                            @else
+                            @if (auth()->user()->cart)
                                 <span class="animate-ping absolute top-0 right-0 inline-flex h-2 w-2 rounded-full bg-blue-600 opacity-75"></span>
                                 <span class="absolute top-0 right-0 inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
                             @endif
@@ -113,18 +112,22 @@
         <div class="border-t border-gray-700 pb-3 pt-4">
             <div class="flex items-center px-5 justify-between">
                 <div class="w-full">
-                    <img class="h-10 w-10 rounded-full" src="{{ auth()->user()->photo }}" alt="{{ auth()->user()->name }}">
-                    <div class="text-base font-medium leading-none text-white">{{ auth()->user()->name }}</div>
+                    <img class="h-10 w-10 rounded-full" src="{{ asset('storage/'.auth()->user()->photo) }}" alt="{{ auth()->user()->name }}">
+                    <div class="text-base font-medium leading-none text-gray-400 dark:text-white mt-4">{{ auth()->user()->name }}</div>
                     <div class="text-sm font-medium leading-none text-gray-400">{{ auth()->user()->email }}</div>
                 </div>
                 
                 <a href="{{ route('cart.list') }}">
-                    <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-dark3 p-1 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-dark3 p-1 text-black dark:text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span class="absolute -inset-1.5"></span>
                         <span class="sr-only">View cart</span>
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                            <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
                         </svg>
+                        @if (auth()->user()->cart)
+                            <span class="animate-ping absolute top-0 right-0 inline-flex h-2 w-2 rounded-full bg-blue-600 opacity-75"></span>
+                            <span class="absolute top-0 right-0 inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+                        @endif
                     </button>
                 </a>
             </div>
@@ -133,7 +136,7 @@
                 <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
-                    <button type="submit" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item
+                    <button type="submit" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white w-full text-left" role="menuitem" tabindex="-1" id="user-menu-item
                     2">Sign out</button>
                 </form>
             </div>

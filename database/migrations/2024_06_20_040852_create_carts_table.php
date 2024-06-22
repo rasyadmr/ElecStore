@@ -8,25 +8,29 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('payment_method');
-            $table->string('status');
-            $table->bigInteger('total');
+            $table->string('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('carts');
     }
 };

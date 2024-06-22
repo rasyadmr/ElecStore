@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class Cart extends Model
 {
     use HasFactory;
     use HasUuids;
@@ -34,16 +34,15 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id',
-        'payment_method',
-        'status',
-        'total'
+        'product_id',
+        'quantity'
     ];
-
-    public function transactionDetails() {
-        return $this->hasMany(TransactionDetail::class, 'transaction_id', 'id');
-    }
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function product() {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }

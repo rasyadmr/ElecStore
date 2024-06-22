@@ -3,62 +3,100 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
     public function list() {
+        $carts = Cart::where('user_id', 'LIKE', auth()->user()->id)->get();
+
         return view('cart.list', [
-            'title' => 'Cart'
+            'title' => 'Cart',
+            'carts' => $carts
         ]);
     }
 
     public function checkout() {
+        $carts = Cart::where('user_id', 'LIKE', auth()->user()->id)->get();
+        $payments = ['Debit Card', 'Credit Card', 'Cash on Delivery', 'OVO', 'GoPay'];
+
         return view('cart.checkout', [
-            'title' => 'Checkout'
+            'title' => 'Checkout',
+            'carts' => $carts,
+            'payments' => $payments
         ]);
     }
 
-    public function add(Product $product, Request $request) {
+    public function add(Request $request) {
         $request->validate([
+            'product_id' => 'exists:products,id',
             'quantity' => 'required|numeric|min:1'
         ]);
 
-        $cart = session()->get('cart', []);
+        $cart = Cart::where('user_id', 'LIKE', auth()->id())->where('product_id', 'LIKE', $request->product_id)->first();
 
-        if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity'] = $cart[$product->id]['quantity'] + $request->quantity;
+        if ($cart) {
+            $cart->increment('quantity', $request->quantity);
         } else {
-            $cart[$product->id] = [
-                "name" => $product->name,
-                "quantity" => 1,
-                "price" => $product->price,
-                "photo" => $product->photo
-            ];
+            Cart::create([
+                'user_id' => auth()->id(),
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity
+            ]);
         }
-
-        session()->put('cart', $cart);
 
         return redirect()->back()->with("success", "Product has been added to cart!");
     }
 
     public function destroy(Request $request) {
-        $cart = session()->get('cart');
+        $request->validate([
+            'cart_id' => 'exists:carts,id'
+        ]);
 
-        if (isset($cart[$request->id])) {
-            unset($cart[$request->id]);
-            session()->put('cart', $cart);
+
+        $cart = Cart::where('user_id', 'LIKE', auth()->id())->where('id', 'LIKE', $request->cart_id)->first();
+
+        if (!$cart) {
+            return redirect()->back()->with("error", "Product not found in cart!");
         }
-        
 
-        session()->flash('success', 'Product has been successfully removed from the cart!');
+        $cart->deleteOrFail();
 
-        return back();
+        return redirect()->back()->with("success", "Product has been removed from the cart!");
     }
 
     public function paid(Request $request) {
-        session()->forget('cart');
-        return redirect(route('home'))->with("success", "Checkout success! Thank you.");
+        $request->validate([
+            'payment_method' => 'required|string'
+        ]);
+
+        $carts = Cart::where('user_id', 'LIKE', $request->user_id)->get();
+
+        if ($carts->isEmpty()) {
+            return redirect()->route('cart.list')->with('error', 'Cart is empty, failed to checkout!');
+        }
+
+        Transaction::create([
+            'user_id' => $request->user_id,
+            'payment_method' => $request->payment_method,
+            'status' => 'pending',
+            'total' => $request->total
+        ]);
+
+        foreach ($carts as $cart) {
+            TransactionDetail::create([
+                'product_id' => $cart->product->id,
+                'transaction_id' => Transaction::latest()->first()->id,
+                'quantity' => $cart->quantity
+            ]);
+
+            $cart->deleteOrFail();
+        }
+
+        return redirect(route('home'))->with("success", "Checkout success, Thank you!");
     }
 }

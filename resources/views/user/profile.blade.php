@@ -11,11 +11,23 @@
         </div>
     </div>
 
+    @if (Auth::check())
+        @if (auth()->user()->id === $user->id)
+        <div class="mb-10">
+            <div class="flex justify-between">
+                <h1 class="text-3xl my-5 font-bold text-black dark:text-white">Transactions History</h1>
+                
+            </div>
+            <x-transaction.table :transactions="auth()->user()->transactions()->paginate(3)"/>
+        </div>
+        @endif
+    @endif
+
     <div class="flex justify-between">
         <h1 class="text-3xl my-5 font-bold text-black dark:text-white">Products</h1>
         @if (Auth::check())
             @if (auth()->user()->id === $user->id)
-                <a href="/product/new" class="bg-dark3 hover:bg-blue-700 text-white rounded my-4 p-2">Add Product</a>
+                <a href="/product/new" class=" my-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add new Product</a>
             @endif
         @endif
     </div>
