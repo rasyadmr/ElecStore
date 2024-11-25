@@ -12,7 +12,7 @@ export default defineConfig({
             plugins: [
                 html({
                     inject: {
-                        injectScripts: `<script type="module" src="/${base}/resources/js/app.js"></script>`, // Manually inject the app.js into the HTML
+                        injectScripts: `<script type="module" src="./resources/js/app.js"></script>`, // Manually inject the app.js into the HTML
                     },
                 }),
             ],
