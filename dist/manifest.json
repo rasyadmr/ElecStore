@@ -1,8 +1,7 @@
 {
-  "resources/css/app.css": {
-    "file": "assets/app-P4Aq3-i3.css",
-    "src": "resources/css/app.css",
-    "isEntry": true
+  "Rollup HTML Asset": {
+    "file": "index.html",
+    "src": "Rollup HTML Asset"
   },
   "resources/js/app.js": {
     "file": "assets/app-B_9xOxt_.js",
